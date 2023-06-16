@@ -1,2 +1,2 @@
 #!/bin/bash
-grep root  |etc/passwq:11
+grep root /etc/passwd
