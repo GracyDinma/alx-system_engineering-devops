@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#A Bash script that stops a process without using kill
+
+pkill -f beyond

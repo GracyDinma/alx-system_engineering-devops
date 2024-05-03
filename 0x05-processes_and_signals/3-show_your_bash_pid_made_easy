@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 #Displays the PID, process name of the processes bash
 #You cannot use ps
 
