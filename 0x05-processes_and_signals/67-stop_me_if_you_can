@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#A script that merges to kill a process
+
+kill "$(ps -x | pgrep -f beyond)"
