@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+#A bash scrip that creates files
+#Displays process abd processes when receiving SIGTERM signal
+#Displays process using SIGINT signal and deletes files
+
+sigterm_handler()
+{
+echo "I hate the kill command"
+}
+
+sigint_handler()
+{
+echo "Y U no love me?!"
+}
+
+sigquit_handler()
+{
+echo "Deleting PID file and terminating script"
+rm -f "/var/run/myscript.pid"
+exit
+}
+
+trap 'sigterm_handler' SIGTERM
+trap 'sigint_handler' SIGINT
+trap 'sigquit_handler' SIGQUIT
+
+pid=$$
+
+echo "$pid" > "/var/run/myscript.pid"
+echo "PID $pid has been written to /var/run/myscript.pid"
+while true; do
+echo "To infinity and beyond"
+sleep 2
+done
