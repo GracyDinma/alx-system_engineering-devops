@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#A script that forcefully killed a process
+
+kill -9 "$(ps -x | pgrep -f highlander)"
