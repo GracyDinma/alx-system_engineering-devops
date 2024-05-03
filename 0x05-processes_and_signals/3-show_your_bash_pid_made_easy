@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+#Displays the PID, process name of the processes bash
+#You cannot use ps
+
+pgrep -l bash
