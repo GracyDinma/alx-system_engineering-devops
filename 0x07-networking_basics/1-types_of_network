@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#A script that tell type of network in local
+3
+
+#A type of network in building
+2
+
+#Network used to browse
+1
