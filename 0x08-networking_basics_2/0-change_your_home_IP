@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#A bash script that configure an ubuntu server
+
+if [ "$(id -u)" -ne 0 ] || [ ! -f /.dockerenv ]; then
+echo "Please run this script as root within a Docker container"
+exit 1
+
+fi
+
+local_ip="127.0.0.2"
+facebook_ip="8.8.8.8"
+
+echo "updating /etc/hosts file..."
+sed -i s/^172.*$// /etc/hosts
+echo "$local_ip local" >> /etc/hosts
+echo "$facebook_ip facebook.com" >> /etc/hosts
+echo "Configuration completed." 
