@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#A script that shows listening sockets and it's PID's
+
+netstat -lpt
