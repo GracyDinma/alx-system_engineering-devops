@@ -13,11 +13,11 @@ PATH_TO_SSH_KEY="$4"
 scp -o StrictHostKeyChecking=no -i "$PATH_TO_SSH_KEY" "$PATH_TO_FILE"
 "{USERNAME}@${IP}:~/"
 
-if [ "$?" -eq 0 ]; then
+if scp_exit_code=$?; then
     echo "File successfully transferred to ${USERNAME}@{IP}:~/"
 else
     echo "File transfer failed."
-    exit 1
+    exit "$scp_exit_code"
 fi
 
 exit 0
