@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # A Bash script that transfers a file from client to a server.
+
 if [ "$#" -lt 4 ]; then
-    echo "Usage: $0 OATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
+    echo "Usage: $0 PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
     exit 1
 fi
 
@@ -10,14 +11,20 @@ IP="$2"
 USERNAME="$3"
 PATH_TO_SSH_KEY="$4"
 
-scp -o StrictHostKeyChecking=no -i "$PATH_TO_SSH_KEY" "$PATH_TO_FILE"
-"{USERNAME}@${IP}:~/"
+if [ ! -f "$PATH_TO_FILE" ]; then
+    echo "Error: File '$PATH_TO_FILE' not found!"
+    exit 1
+fi
 
-if scp_exit_code=$?; then
-    echo "File successfully transferred to ${USERNAME}@{IP}:~/"
+# Transfer the file using scp
+scp -o StrictHostKeyChecking=no -i "$PATH_TO_SSH_KEY" "$PATH_TO_FILE" "$USERNAME@$IP":~/
+
+scp_exit_code=$?
+if [ $scp_exit_code -eq 0 ]; then
+    echo "File '$PATH_TO_FILE' transferred successfully to $USERNAME@$IP:~/"
 else
-    echo "File transfer failed."
-    exit "$scp_exit_code"
+    echo "Error: Failed to transfer file '$PATH_TO_FILE' to $USERNAME@$IP:~/"
+    exit $scp_exit_code
 fi
 
 exit 0
