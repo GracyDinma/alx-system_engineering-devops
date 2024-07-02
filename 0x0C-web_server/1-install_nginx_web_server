@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# A Bash script that configures a new ubuntu machine running on the sever
+# A Bash script that configures a new ubuntu machine running on the server
+
 apt-get update
 apt-get install -y nginx
 
