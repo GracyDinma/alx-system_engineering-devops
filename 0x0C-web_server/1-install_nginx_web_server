@@ -10,12 +10,6 @@ echo "Hello World!" > /var/www/html/index.html
 # Ensure nginx is running and listening on port 80
 service nginx start
 
-# Check if nginx is running
-if ! pgrep nginx >/dev/null; then
-    echo "Nginx failed to start."
-    exit 1
-fi
-
 check_nginx() {
     curl -s localhost | grep -q "Hello World!"
 }
@@ -36,4 +30,5 @@ restart_nginx() {
 
 # Restart nginx to ensure any configurations take effect (if required)
 restart_nginx
+
 exit 0
