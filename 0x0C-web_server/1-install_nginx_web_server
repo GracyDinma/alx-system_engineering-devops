@@ -4,11 +4,20 @@
 apt-get update
 apt-get install -y nginx
 
+# Allow HTTP traffic through the firewall for nginx
+ufw allow 'Nginx HTTP'
+
 # A page contains the string
 echo "Hello World!" > /var/www/html/index.html
 
 # Ensure nginx is running and listening on port 80
 service nginx start
+
+# Check if nginx is running
+if ! pgrep nginx >/dev/null; then 
+    echo "Nginx failed to start."
+    exit 1
+fi
 
 check_nginx() {
     curl -s localhost | grep -q "Hello World!"
@@ -24,11 +33,5 @@ else
     exit 1
 fi
 
-restart_nginx() {
-    nginx -s reload
-}
-
-# Restart nginx to ensure any configurations take effect (if required)
-restart_nginx
 
 exit 0
