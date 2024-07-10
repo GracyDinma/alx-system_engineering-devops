@@ -1,37 +1,17 @@
 #!/usr/bin/env bash
 # A Bash script that configures a new ubuntu machine running on the server
 
-apt-get update
-apt-get install -y nginx
+sudo apt-get update
+sudo apt-get install -y nginx
 
-# Allow HTTP traffic through the firewall for nginx
-ufw allow 'Nginx HTTP'
+# Allow HTTP traffic through the firewall for nginx and listening on port 80
+sudo ufw allow 'Nginx HTTP'
 
 # A page contains the string
-echo "Hello World!" > /var/www/html/index.html
+echo "Hello World!" | sudo tee /var/www/html/index.html
 
-# Ensure nginx is running and listening on port 80
-service nginx start
+# Testing our script
+sudo nginx -t
 
-# Check if nginx is running
-if ! pgrep nginx >/dev/null; then 
-    echo "Nginx failed to start."
-    exit 1
-fi
-
-check_nginx() {
-    curl -s localhost | grep -q "Hello World!"
-}
-
-sleep 2
-
-# Verify nginx serves "Hello World!" as expected
-if check_nginx; then
-    echo "Nginx is serving 'Hello World!' as expected."
-else
-    echo "Failed to verify 'Hello World!' from Nginx."
-    exit 1
-fi
-
-
-exit 0
+# To restart nginx
+sudo service nginx restart
