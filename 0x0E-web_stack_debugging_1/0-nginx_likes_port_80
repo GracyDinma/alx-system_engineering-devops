@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Install Nginx if not already installed
-apt-get update
-apt-get install -y nginx
+sudo apt-get update
+sudo apt-get install -y nginx
 
 # Define Nginx configuration file
 ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
 # Restart nginx
-service nginx restart
+sudo service nginx restart
