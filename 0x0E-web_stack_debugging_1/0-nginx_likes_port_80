@@ -4,7 +4,7 @@ sudo apt-get update
 sudo apt-get install -y nginx
 
 # Define Nginx configuration file
-ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+nginx_conf="/etc/nginx/sites-available/default"
 
 # Restart nginx
 sudo service nginx restart
