@@ -1,9 +1,4 @@
 #!/usr/bin/env bash
-# Configuring a server
-sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
-# restart nginx
-sudo service nginx restart
-
-#terminate the first nginx process ID
-sudo pkill -o nginx
+sudo service nginx stop
+echo "nginx is not running"
