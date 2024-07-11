@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# create a symbolic link( -s option) between the Nginx configuration
+ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enaled/default
+
+# restart nginx
+sudo service nginx restart
+
+#terminate the first nginx process ID
+kill "$(pgrep 'nginx' | head -1)"
