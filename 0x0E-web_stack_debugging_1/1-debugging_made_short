@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Restart ngin
-sudo service nginx restart
-
 sudo service nginx stop
 echo "nginx is not running"
+
+# Restart ngin
+sudo service nginx restart
