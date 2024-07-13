@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# customizing a 404 error-page
+
+sudo apt-get update
+sudo apt-get install -y nginx
+
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+string_to_replace="server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/GracyDinma permanent;"
+
+sudo sed -i s/"server_name _;/$string_to_replace/" /etc/nginx/sites-enabled/default
+
+# creating a 404 custom error page
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+string_to_replace="listen 80 default_server;\\
+\\
+\terror_page 404 /404.html;\\
+\\
+\tlocation = /404.html {\\
+\\
+\t\troot /var/www/html;\\
+\\
+\t\tinternal;\\
+\\
+\t}"
+
+sudo sed -i "s|listen 80 default_server;|$string_to_replace|" /etc/nginx/sites-enabled/default
+
+# To test for configuration for syntax errors
+sudo nginx -t
+
+# restart nginx after implementing changes
+sudo service nginx restart
