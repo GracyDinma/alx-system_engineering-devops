@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# configuring web-01 to have an HTTP header message
+
+# updating nginx
+sudo apt-get update
+sudo apt-get instal -y nginx
+
+# creating an index pag
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# performing redirection
+string_to_replace="server_name _;/n/trewrite ^\/redirect_me http:\/\/github.com\/GracyDinma permanent;"
+
+sudo sed -i s/"server_name _;/$string_to_replace/" /etc/nginx/sites-enabled/default
+
+# creating a 404 custom error page
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+
+# custom HTTP response header
+sudo sed -i "server_name _:/a add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default
+
+# test for syntax error
+sudo nginx -t
+
+# restart after making changes
+sudo service nginx restart
