@@ -1,15 +1,12 @@
 #!/usr/bin/env bash
-# configuring web-01 to have an HTTP header message
+# customizing a 404 error-page
 
-# updating nginx
 sudo apt-get update
-sudo apt-get instal -y nginx
+sudo apt-get install -y nginx
 
-# creating an index pag
 echo "Hello World!" | sudo tee /var/www/html/index.html
 
-# performing redirection
-string_to_replace="server_name _;\n\trewrite ^\/redirect_me http:\/\/github.com\/GracyDinma permanent;"
+string_to_replace="server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/GracyDinma permanent;"
 
 sudo sed -i s/"server_name _;/$string_to_replace/" /etc/nginx/sites-enabled/default
 
@@ -29,11 +26,12 @@ string_to_replace="listen 80 default_server;\\
 
 sudo sed -i "s|listen 80 default_server;|$string_to_replace|" /etc/nginx/sites-enabled/default
 
-# custom HTTP response header
+# custom HTTP header
+
 sudo sed -i "/server_name _/a add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default
 
-# test for syntax error
+# To test for configuration for syntax errors
 sudo nginx -t
 
-# restart after making changes
+# restart nginx after implementing changes
 sudo service nginx restart
