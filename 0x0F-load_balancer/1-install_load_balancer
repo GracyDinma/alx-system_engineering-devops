@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Scripts that install and configure HAProxy on load balancer-01 server
+
+# Install and configure HAProxy on my lb-01 server
+sudo apt-get update
+sudo apt-get -y install haproxy
+
+# edit configuration file
+server_config=\
+"
+frontend GracyDinma_frontend
+        bind *:80
+        mode http
+        default_backend GracyDinma_backend
+backend GracyDinma_backend
+	balance roundrobin
+	server 27152-web-01 52.86.250.192:80 check
+	server 27152-web-02 34.203.29.78:80 check
+"
+echo "$server_config" | sudo tee -a /etc/haproxy/haproxy.cfg
+
+# To enable HAProxy init script
+echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
+
+# Testing the HAProxy configuration file
+sudo haproxy -c -f /etc/haproxy/haproxy.cfg
+
+# Restart the Nginx service
+sudo service haproxy restart
