@@ -1,0 +1,15 @@
+# install ufw
+sudo apt-get update
+sudo apt-get -y install ufw
+
+# enable firewall
+sudo ufw enable
+
+# setting rules to allow
+sudo ufw allow 22
+sudo ufw allow 443
+sudo ufw allow 80
+
+# verifying the change
+sudo ufw status
+~               
