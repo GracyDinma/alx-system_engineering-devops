@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 A sript that, uses a REST API, for a given employee ID, returns
-information about his/her TODO list progress records all task owned 
+information about his/her TODO list progress records all task owned
 and exports data in the JSON format.
 """
 
