@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 # Make it short
 sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-# Restart ngin
 sudo service nginx restart
-#terminate the process
 rm/run/nginx.pid
