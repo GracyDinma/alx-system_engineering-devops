@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # Restart Nginx and ensure it is not running
-sudo service nginx stop
-sudo rm -f /run/nginx.pid
-sudo service nginx start
+cat /etc/nginx/sites-available/default > /etc/nginx/sites-enabled/default
+sudo service nginx restart
+rm /run/nginx.pid
