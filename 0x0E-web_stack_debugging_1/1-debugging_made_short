@@ -2,8 +2,4 @@
 # Restart Nginx and ensure it is not running
 sudo service nginx stop
 sudo rm -f /run/nginx.pid
-sudo service nginx start#!/usr/bin/env bash
-# Restart Nginx and ensure it is not running
-sudo service nginx stop
-sudo rm -f /run/nginx.pid
 sudo service nginx start
